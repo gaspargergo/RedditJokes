@@ -161,22 +161,9 @@ var changePostLimit = function() {
 
   loadData();
 }
-
 /*
---------------------
-Functions for mobile
---------------------
-*/
-var decideIfMobile = function() {
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    alert("A mobile device.Interesting");
-  }
-}
-
-/*
------------------
-Functions to call
------------------
+-------------------------
+Functions to call on load
+-------------------------
 */
 loadData();
-decideIfMobile();
