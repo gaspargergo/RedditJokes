@@ -168,8 +168,8 @@ Functions for mobile
 --------------------
 */
 var decideIfMobile = function() {
-  if(window.navigator.userAgent.platform == "Mobile" || window.navigator.userAgent.platform == "Tablet") {
-    alert("You are using a mobile! Yay!")
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    alert("A mobile device.Interesting");
   }
 }
 
