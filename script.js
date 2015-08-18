@@ -47,8 +47,6 @@ request.onerror = function() {
 request.send();
 }
 
-loadData(); //The first call - when loading the website.
-
 var addPosts = function(listing){ //Adds post to a string that will be added to the body
   var jokes = 0;
   var result = "";
@@ -163,3 +161,22 @@ var changePostLimit = function() {
 
   loadData();
 }
+
+/*
+--------------------
+Functions for mobile
+--------------------
+*/
+var decideIfMobile = function() {
+  if(window.navigator.userAgent.platform == "Mobile" || window.navigator.userAgent.platform == "Tablet") {
+    alert("You are using a mobile! Yay!")
+  }
+}
+
+/*
+-----------------
+Functions to call
+-----------------
+*/
+loadData();
+decideIfMobile();
