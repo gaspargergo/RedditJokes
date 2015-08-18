@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/animate.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/jokes.css">
+    <link rel="shortcut icon" href="https://www.redditstatic.com/favicon.ico">
+    <title>Jokes from reddit</title>
+  </head>
+
+  <body>  
+
+    <div id="header">
+      <div id="header_title"><h1><a href="http://www.reddit.com/r/jokes">Jokes from reddit</a></h1></div>
+    </div>
+    <div id="header_menu">
+      <div id="header_menubox">
+        <div class="header_menuitem"><a id="sortingChangeA"onclick="changeSorting()">r/jokes/new/</a></div>
+        <div class="header_menuitem"><a id="sLimitChangeA" onclick="changeSFilter()">Shortness filter off</a></div>
+        <div class="header_menuitem"><a id="NSFWChangeA" onclick="changeNSFWFilter()">NSFW filter on</a></div>
+        <div class="header_menuitem"><a id="colorChangeA" onclick="changeColor()">Change Theme</a></div>
+        <div class="header_menuitem"><a id="PostLimitChangeA" onclick="changePostLimit()">Post limit: 10</a></div>
+      </div>
+    </div>
+
+    <div id="content"></br>
+        
+    </div>
+
+    <script src="script.js"></script>
+    
+  </body>
+</html>
