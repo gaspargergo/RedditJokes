@@ -68,14 +68,14 @@ var addPosts = function(listing){ //Adds post to a string that will be added to 
         if(obj.over_18 === false) {
           var temp = result;
              
-          result = temp + "<div class='animated fadeIn'>" + "<h1>" + title + "</h1>" + "<p>" + text + "</p>" + "</div>";
+          result = temp + "<div class='animated fadeIn'>" + "<h1>" + "<a href=" + '"' + exturl + '">' + title + "</a>" + "</h1>" + "<p>" + text + "</p>" + "</div>";
           jokes += 1;
         }
       }
       else {
         var temp = result;
              
-        result = temp + "<div class='animated fadeIn'>" + "<h1>" + title + "</h1>" + "<p>" + text + "</p>" + "</div>";
+        result = temp + "<div class='animated fadeIn'>" + "<h1>" + "<a href=" + '"' + exturl + '">' + title + "</a>" + "</h1>" + "<p>" + text + "</p>" + "</div>";
         jokes += 1;
       }
     }
