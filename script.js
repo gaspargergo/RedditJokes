@@ -4,14 +4,14 @@ Variables
 ---------
 */
 
-var list;
+var list = [];
 var sorting = "/new"
 var colorArray = ["#F44336","#9C27B0","#2196F3","#009688","#607D8B","#4CAF50"];
 var sortingArray = ["/hot","/new"];
-var limitArray = [25,50,10];
 var nsfwFilter = true;
 var shortnessFilter = false;
-var postLimit = 10;
+var firstLoad = true;
+var lastID;
 
 /*
 ---------------------------
@@ -20,11 +20,12 @@ Functions loading the jokes
 */
 var loadData = function() {
   var urlToLoad = "";
-  if(postLimit <= 10) {
-    urlToLoad = "https://www.reddit.com/r/jokes" + sorting + ".json";
+  if(firstLoad === true) {
+    urlToLoad = "https://www.reddit.com/r/jokes" + sorting + ".json" + "?limit=25";
+    firstLoad = false;
   }
   else {
-    urlToLoad = "https://www.reddit.com/r/jokes" + sorting + ".json" + "?limit=" + (postLimit+ 25);
+    urlToLoad = "https://www.reddit.com/r/jokes" + sorting + ".json" + "?count=25&after=" + lastID;
   }
 
   var request = new XMLHttpRequest();
@@ -33,8 +34,10 @@ var loadData = function() {
   request.onload = function() {
   if (this.status >= 200 && this.status < 400) {
     var json = JSON.parse(this.response);
-    list = json.data.children;
-    listPosts(list);
+    for(var i = 0; i < json.data.children.length; i++){
+      list.push(json.data.children[i]);
+    }
+    listPosts();
   } else {
     // We reached our target server, but it returned an error
   }
@@ -47,8 +50,7 @@ request.onerror = function() {
 request.send();
 }
 
-var addPosts = function(listing){ //Adds post to a string that will be added to the body
-  var jokes = 0;
+var addPosts = function(){ //Adds post to a string that will be added to the body
   var result = "";
   var textLimit = 111111111;
 
@@ -56,8 +58,8 @@ var addPosts = function(listing){ //Adds post to a string that will be added to 
     textLimit = 600;
   }
 
-  for(var i = 0; jokes < postLimit; i++) {
-    var obj = listing[i].data;
+  for(var i = 0; i < list.length; i++) {
+    var obj = list[i].data;
     
     var title = obj.title;
     var exturl = obj.url;
@@ -65,27 +67,23 @@ var addPosts = function(listing){ //Adds post to a string that will be added to 
 
     if(text.length < textLimit) {
       if(nsfwFilter === true) {
-        if(obj.over_18 === false) {
-          var temp = result;
-             
-          result = temp + "<div class='animated fadeIn'>" + "<h1>" + "<a href=" + '"' + exturl + '">' + title + "</a>" + "</h1>" + "<p>" + text + "</p>" + "</div>";
-          jokes += 1;
+        if(obj.over_18 === false) {    
+          result += "<div class='animated fadeIn'>" + "<h1>" + "<a href=" + '"' + exturl + '">' + title + "</a>" + "</h1>" + "<p>" + text + "</p>" + "</div>";
         }
       }
       else {
-        var temp = result;
-             
-        result = temp + "<div class='animated fadeIn'>" + "<h1>" + "<a href=" + '"' + exturl + '">' + title + "</a>" + "</h1>" + "<p>" + text + "</p>" + "</div>";
-        jokes += 1;
+        result += "<div class='animated fadeIn'>" + "<h1>" + "<a href=" + '"' + exturl + '">' + title + "</a>" + "</h1>" + "<p>" + text + "</p>" + "</div>";
       }
     }
   }
+  lastID = list[list.length-1].data.name;
+  result += "<div id='loadMoreBtn' onclick='loadData()'>Load more</div>";
 
   return result;
 }
 
-var listPosts = function(listing) { //Adds the string to the body
-  var result = addPosts(listing);
+var listPosts = function() { //Adds the string to the body
+  var result = addPosts();
   document.getElementById("content").innerHTML = result;
 }
 
@@ -120,7 +118,7 @@ var changeSFilter = function() {
     document.getElementById("sLimitChangeA").innerHTML = "Shortness filter off";
   }
 
-  listPosts(list);
+  listPosts();
 }
 
 var changeNSFWFilter = function() {
@@ -133,33 +131,20 @@ var changeNSFWFilter = function() {
     document.getElementById("NSFWChangeA").innerHTML = "NSFW filter off";
   }
 
-  listPosts(list);
+  listPosts();
 }
 
 var i = 0; //The var to cycle through colors
 var changeColor = function() {
   document.getElementById("header").style.backgroundColor = colorArray[i];
   document.getElementById("header_menu").style.backgroundColor = colorArray[i];
+  document.getElementById("loadMoreBtn").style.backgroundColor = colorArray[i];
   if(i === colorArray.length-1) {
     i = 0;
   }
   else {
     i += 1;
   }
-}
-
-var j = 0; //The var to cycle through limit numbers
-var changePostLimit = function() {
-  postLimit = limitArray[j];
-  document.getElementById("PostLimitChangeA").innerHTML = "Post limit: " + postLimit;
-  if(j === limitArray.length-1) {
-    j = 0;
-  }
-  else {
-    j += 1;
-  }
-
-  loadData();
 }
 /*
 -------------------------
