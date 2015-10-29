@@ -6,7 +6,7 @@ Variables
 
 var list = [];
 var sorting = "/new"
-var colorArray = ["#F44336","#9C27B0","#2196F3","#009688","#607D8B","#4CAF50"];
+var colorArray = ["#009688","#607D8B","#2196F3","#9C27B0","#F44336","#4CAF50"];
 var sortingArray = ["/hot","/new"];
 var nsfwFilter = true;
 var shortnessFilter = false;
@@ -48,8 +48,6 @@ request.onerror = function() {
 };
 
 request.send();
-
-document.getElementById("loadMoreBtn").style.backgroundColor = colorArray[i]; //Sets the button's color so it won't reset when calling the function again
 }
 
 var addPosts = function(){ //Adds post to a string that will be added to the body
@@ -87,6 +85,7 @@ var addPosts = function(){ //Adds post to a string that will be added to the bod
 var listPosts = function() { //Adds the string to the body
   var result = addPosts();
   document.getElementById("content").innerHTML = result;
+  document.getElementById("loadMoreBtn").style.backgroundColor = document.getElementById("header").style.backgroundColor; //Sets the button's color so it won't reset when calling the function again
 }
 
 /*
