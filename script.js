@@ -19,7 +19,6 @@ Functions loading the jokes
 ---------------------------
 */
 var loadData = function() { //gets the jason file from Reddit and parses it to a list array
-  document.getElementById("loadMoreBtn").style.backgroundColor = colorArray[i]; //Sets the button's color so it won't reset when calling the function again
   var urlToLoad = "";
   if(firstLoad === true) {
     urlToLoad = "https://www.reddit.com/r/jokes" + sorting + ".json" + "?limit=25";
@@ -49,6 +48,8 @@ request.onerror = function() {
 };
 
 request.send();
+
+document.getElementById("loadMoreBtn").style.backgroundColor = colorArray[i]; //Sets the button's color so it won't reset when calling the function again
 }
 
 var addPosts = function(){ //Adds post to a string that will be added to the body
