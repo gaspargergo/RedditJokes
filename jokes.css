@@ -17,8 +17,10 @@ body{
 	position: fixed;
 	background-color: #4CAF50;
 	z-index: 1;
+	transition: all 0.2s ease-in-out;
 }
-	#header_title{
+	#header #header_title{
+		z-index: 7;
 		color: #FFFFFF;
 		font-size: 25px;
 		line-height: 56px;
@@ -31,6 +33,7 @@ body{
 		margin-top: 0px;
 	}
 	#header_menu{
+		transition: all 0.2s ease-in-out;
 		background-color: #4CAF50;
 		height: 100px;
 		width: 100%;
