@@ -34,16 +34,15 @@ body{
 		background-color: #4CAF50;
 		height: 100px;
 		width: 100%;
+		position: fixed;
 	}
-		#header_menubox{
+		#header_menu #header_menubox{
 			height: 40px;
 			width: 80%;
 			margin-left: 10%;
 			margin-right: 10%;
 			margin-top: 60px;
 			color: white;
-			position: absolute;
-
 		}
 			.header_menuitem{
 				line-height: 40px;
@@ -71,6 +70,7 @@ body{
 	margin-left: 10%;
 	margin-right: 10%;
 	margin-bottom: 50px;
+	margin-top: 100px;
 	position: absolute;
 	z-index: -1;
 	color: #424242;
