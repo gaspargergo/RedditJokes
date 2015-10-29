@@ -95,6 +95,8 @@ Functions of the options/menu items
 
 var k = 0; //the var to cycle through different sorts
 var changeSorting = function() {
+  list = [];
+  firstLoad = true;
   sorting = sortingArray[k];
   document.getElementById("sortingChangeA").innerHTML = "r/jokes" + sorting;
 
